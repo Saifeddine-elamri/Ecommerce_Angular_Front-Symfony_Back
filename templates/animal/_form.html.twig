@@ -1,0 +1,111 @@
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Formulaire d'Enregistrement Animal</h1>
+
+        <div class="card shadow-lg border-light rounded">
+            <div class="card-body">
+                <h5 class="card-title text-center mb-4">Veuillez remplir le formulaire ci-dessous</h5>
+
+                {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                    
+                    <div class="mb-4">
+                        {{ form_row(form.Name, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le nom de l\'animal'}}) }}
+                    </div>
+
+                    <div class="mb-4">
+                        {{ form_row(form.Age, {'attr': {'class': 'form-control', 'placeholder': 'Entrez l\'âge de l\'animal'}}) }}
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="bi bi-check2-circle"></i> {{ button_label|default('Enregistrer') }}
+                        </button>
+                    </div>
+                    
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    /* Global Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    /* Container and Card */
+    .container {
+        max-width: 800px;
+        padding: 30px;
+    }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Form Fields */
+    .form-control {
+        border-radius: 5px;
+        box-shadow: none;
+        border: 1px solid #ccc;
+        padding: 12px 15px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    }
+
+    .form-label {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #555;
+    }
+
+    .invalid-feedback {
+        font-size: 0.875rem;
+        color: #e74c3c;
+    }
+
+    /* Button */
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        font-size: 1.1rem;
+        padding: 12px 25px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        transform: translateY(-2px);
+    }
+
+    /* Focus and Validation */
+    .needs-validation .form-control:invalid {
+        border-color: #e74c3c;
+    }
+
+    .needs-validation .form-control:valid {
+        border-color: #2ecc71;
+    }
+</style>
+{% endblock %}

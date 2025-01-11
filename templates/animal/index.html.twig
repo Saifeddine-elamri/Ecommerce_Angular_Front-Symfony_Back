@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Animal Database List{% endblock %}
+
+{% block stylesheets %}
+<style>
+    /* Style global */
+    .all {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;
+    }
+
+    h1 {
+        color: #2c3e50;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    h4 {
+        color: #27ae60;
+        font-size: 1.25rem;
+        margin-top: 10px;
+    }
+
+    p {
+        font-size: 1rem;
+        color: #e74c3c;
+    }
+
+    /* Table styling */
+    .table {
+        width: 80%;
+        margin-top: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #3498db;
+        color: #fff;
+        font-size: 1.1rem;
+    }
+
+    td {
+        background-color: #ecf0f1;
+        font-size: 1rem;
+    }
+
+    tr:hover {
+        background-color: #dcdfe1;
+    }
+
+    /* Create new button */
+    .create {
+        text-decoration: none;
+        margin-top: 30px;
+        padding: 12px 20px;
+        background-color: #2ecc71;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .create:hover {
+        background-color: #27ae60;
+        transform: scale(1.05);
+    }
+
+    /* Links (show/edit) */
+    a {
+        text-decoration: none;
+        color: #3498db;
+        padding: 5px 10px;
+        margin: 0 5px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+        background-color: #3498db;
+        color: white;
+    }
+
+    /* Alert message for no records found */
+    .no-records {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #e74c3c;
+        padding: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+   <div class="all">
+    <h1>Animal Database List</h1>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <h4>Bienvenue, Notre admin!</h4>
+    {% else %}
+        <p>Veuillez vous connecter en tant qu'un admin pour accéder à ce contenu.</p>
+    {% endif %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for animal in animals %}
+            <tr>
+                <td>{{ animal.id }}</td>
+                <td>{{ animal.Name }}</td>
+                <td>{{ animal.Age }}</td>
+                <td>
+                    <a href="{{ path('app_animal_show', {'id': animal.id}) }}">Show</a>
+                    <a href="{{ path('app_animal_edit', {'id': animal.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4" class="no-records">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="create" href="{{ path('app_animal_new') }}">Create New</a>
+    </div>
+{% endblock %}
